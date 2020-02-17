@@ -33,6 +33,19 @@
             "scripts": []
           },
           "configurations": {
+            "development":{
+              "optimization": false,
+              "outputHashing": "none",
+              "sourceMap": true,
+              "extractCss": true,
+              "namedChunks": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "commonChunk": true,
+              "progress": true,
+              "watch": true
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -48,6 +61,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "progress": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -69,6 +83,9 @@
             "browserTarget": "angular-apm-rxjs:build"
           },
           "configurations": {
+            "development":{
+              "browserTarget": "angular-apm-rxjs:build:development"
+            },
             "production": {
               "browserTarget": "angular-apm-rxjs:build:production"
             }
