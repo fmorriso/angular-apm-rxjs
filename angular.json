@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "angular-apm-rxjs": {
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-apm-rxjs"
+    }
+  },
+  "defaultProject": "angular-apm-rxjs",
+  "cli": {
+    "analytics": "c60c64ff-2cc0-492c-a534-f98a390c4717"
+  }
 }
