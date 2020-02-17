@@ -28,12 +28,13 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
             "scripts": []
           },
           "configurations": {
-            "development":{
+            "development": {
               "optimization": false,
               "outputHashing": "none",
               "sourceMap": true,
@@ -83,7 +84,7 @@
             "browserTarget": "angular-apm-rxjs:build"
           },
           "configurations": {
-            "development":{
+            "development": {
               "browserTarget": "angular-apm-rxjs:build:development"
             },
             "production": {
@@ -109,6 +110,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
             "scripts": []
