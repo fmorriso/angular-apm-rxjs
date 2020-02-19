@@ -3,7 +3,7 @@ import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 
 
 const routes: Routes = [];
-const routeOptions: ExtraOptions = {enableTracing: true};
+const routeOptions: ExtraOptions = {enableTracing: false};
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, routeOptions)],

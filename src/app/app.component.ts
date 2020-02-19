@@ -1,5 +1,6 @@
 import { Component, VERSION, OnInit } from '@angular/core';
 import { of, from } from 'rxjs';
+import { CustomMaterialModule} from './shared/custom-material.module';
 
 @Component({
   selector: 'pm-root',
