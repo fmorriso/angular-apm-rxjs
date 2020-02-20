@@ -1,6 +1,6 @@
 import { Component, VERSION, OnInit } from '@angular/core';
 import { of, from } from 'rxjs';
-import { CustomMaterialModule} from './shared/custom-material.module';
+import { map, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'pm-root',
@@ -26,5 +26,13 @@ export class AppComponent implements OnInit {
       err => console.log(`${err}`),
       () => console.log('No more apples.  Go home.')
     );
+
+    of(2, 4, 6)
+      .pipe(
+        map(item => item * 2),
+        tap(item => console.log(item)),
+        take(2)
+      )
+      .subscribe(console.log);
   }
 }
