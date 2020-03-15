@@ -31,7 +31,8 @@
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
-            "scripts": []
+						"scripts": [],
+						"es5BrowserSupport": true
           },
           "configurations": {
             "development": {
@@ -60,7 +61,8 @@
               "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": true,
+							"vendorChunk": true,
+							"commonChunk": true,
               "buildOptimizer": true,
               "progress": true,
               "budgets": [
@@ -146,6 +148,6 @@
   },
   "defaultProject": "angular-apm-rxjs",
   "cli": {
-    "analytics": "c60c64ff-2cc0-492c-a534-f98a390c4717"
+    "analytics": false
   }
 }

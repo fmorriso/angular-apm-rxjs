@@ -1,4 +1,5 @@
 import { Component, OnInit, VERSION } from '@angular/core';
+//
 import { MaterialVersionInformationService } from '../shared/material-version-information.service';
 
 @Component({
