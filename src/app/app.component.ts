@@ -9,7 +9,6 @@ import { MaterialVersionInformationService } from './shared/material-version-inf
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'angular-apm-rxjs';
   ngVersion: string;
 
   constructor(private matVersionService: MaterialVersionInformationService) {}
@@ -23,11 +22,18 @@ export class AppComponent implements OnInit {
 
     of(2, 4, 6, 8).subscribe(console.log);
 
-    from([20, 15, 10, 5]).subscribe(
-      item => console.log(`resulting item .. ${item}`),
-      err => console.log(`${err}`),
-      () => console.log('complete')
-    );
+    from([20, 15, 10, 5])
+      .pipe(
+        tap(item => console.log(`Original item: ${item}`)),
+        map(item => item * 2),
+        map(item => item - item / 5),
+        map(item => item.toFixed(1))
+      )
+      .subscribe(
+        item => console.log(`resulting item .. ${item}`),
+        err => console.log(`${err}`),
+        () => console.log('complete')
+      );
 
     of(...['Apple1', 'Apple2', 'Apple3']).subscribe(
       apple => console.log(`Apple was emitted ${apple}`),
