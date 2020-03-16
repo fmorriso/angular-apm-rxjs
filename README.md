@@ -1,13 +1,20 @@
 # Angular Apm Rxjs
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
+This project was originally generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
+
+It has been upgraded to the following:
+* Angular/CLI 9.0.6
+* Angular 9.0.6
+* Angular Material 9.1.2
+* Angular Flex Layout 9.0.0-beta.29
+* RxJS 6.5.4
 ## Problems and Solutions
 Invoking `ng build` or `ng serve` sometimes results in the following issue:
 ```
 ERROR in ngcc is already running at process with id 7452.
 ```
 
-Stop the `serve` and delete this file:
+Stop `ng serve` if it is running and then delete this file:
 ```
 node_modules/@angular/compiler-cli/ngcc/_ngcc_lock_file
 ```
