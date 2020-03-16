@@ -16,8 +16,27 @@ body {
 	.bold {
 		font-weight: bold;
 	}
-	
+
 	.italic {
 		font-style: italic;
+	}
+
+	.ul-unstyled {
+		list-style-type: none;
+		margin:0;
+		padding: 0;
+	}
+
+	.border-thick {
+		border-color: black;
+		border-width: 0.1em;
+		border-style: solid;
+	}
+
+	.center-66-pct {
+		width: 66%;
+		max-width: 66%;
+		margin-left:17%;
+		margin-right:17%;
 	}
 }

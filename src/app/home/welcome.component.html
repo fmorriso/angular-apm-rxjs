@@ -1,24 +1,21 @@
-<div fxLayout="column" fxLayoutAlign="start center" class="mat-body-1">
-	<mat-card>
-		<mat-card-title>
-			Welcome to Angular with RxJS
-		</mat-card-title>
-		<mat-card-subtitle>
-			<span class="italic">Pluralsight Course by Deborah Kurata</span>
-		</mat-card-subtitle>
-		<mat-card-content>
-			<mat-list role="list">
-				<mat-list-item> <span class="bold">Title:&nbsp;</span>{{ title }} </mat-list-item>
-				<mat-list-item>
-					<span class="bold">Angular version:&nbsp;</span>{{ ngVersion }}
-				</mat-list-item>
-				<mat-list-item>
-					<span class="bold">Angular Material version:&nbsp;</span>{{ materialVersion }}
-				</mat-list-item>
-				<mat-list-item>
-					<span class="bold">Angular Flex Layout Version:&nbsp;</span>{{ angularFlexVersion }}
-				</mat-list-item>
-			</mat-list>
-		</mat-card-content>
-	</mat-card>
-</div>
+<mat-card class="text-center border-thick center-66-pct ">
+
+	<div><h1 class="bold">Welcome</h1></div>
+	<div width="90%" height="90%">
+		<img src="../../favicon.ico"/>
+	</div>
+	<mat-card-content>
+		<h2 class="text-center">Developed by:</h2>
+		<h1 class="text-center">Deborah Kurata</h1>
+		<h3 class="text-center">@deborahkurata</h3>
+		<h3 class="text-center">
+			<a href="http://www.bit.ly/DeborahKsBlog" target="blank">www.bit.ly/DeborahKsBlog</a>
+		</h3>
+		<h4 class="bold">Using:</h4>
+		<ul class="ul-unstyled">
+			<li><span class="bold">Angular version:&nbsp;</span>{{ ngVersion }}</li>
+			<li><span class="bold">Angular Material version:&nbsp;</span>{{ materialVersion }}</li>
+			<li><span class="bold">Angular Flex Layout Version:&nbsp;</span>{{ angularFlexVersion }}</li>
+		</ul>
+	</mat-card-content>
+</mat-card>

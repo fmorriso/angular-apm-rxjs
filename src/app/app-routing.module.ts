@@ -5,7 +5,7 @@ import { WelcomeComponent } from './home/welcome.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: 'welcome', component: WelcomeComponent, data: { label: 'Welcome' } },
+  { path: 'welcome', component: WelcomeComponent, data: { label: 'Home' } },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

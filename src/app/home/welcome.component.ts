@@ -9,7 +9,7 @@ import { AngularFLexLayoutVersionInformationService } from '../shared/angular-fl
 	styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-	title = 'angular-apm-rxjs';
+	title = 'Acme Product Management';
 	public get pageTitle() {
 		return 'Welcome';
 	}
