@@ -1,10 +1,24 @@
-<div class="text-center">
+<div fxLayout="column" fxLayoutAlign="start center" class="mat-body-1">
 	<mat-card>
-		<h3 class="bold">Welcome</h3>
+		<mat-card-title>
+			Welcome to Angular with RxJS
+		</mat-card-title>
+		<mat-card-subtitle>
+			<span class="italic">Pluralsight Course by Deborah Kurata</span>
+		</mat-card-subtitle>
 		<mat-card-content>
-			<div>Title: {{ title }}</div>
-			<div>Angular version: {{ ngVersion }}</div>
-			<div>Angular Material version: {{ materialVersion }}</div>
+			<mat-list role="list">
+				<mat-list-item> <span class="bold">Title:&nbsp;</span>{{ title }} </mat-list-item>
+				<mat-list-item>
+					<span class="bold">Angular version:&nbsp;</span>{{ ngVersion }}
+				</mat-list-item>
+				<mat-list-item>
+					<span class="bold">Angular Material version:&nbsp;</span>{{ materialVersion }}
+				</mat-list-item>
+				<mat-list-item>
+					<span class="bold">Angular Flex Layout Version:&nbsp;</span>{{ angularFlexVersion }}
+				</mat-list-item>
+			</mat-list>
 		</mat-card-content>
 	</mat-card>
 </div>

@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { APP_BASE_HREF } from '@angular/common';
 //
 import { CustomMaterialModule } from './shared/custom-material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 //
 import { AppRoutingModule } from './app-routing.module';
 //
@@ -24,6 +25,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 		BrowserModule,
 		BrowserAnimationsModule,
 		CustomMaterialModule,
+		FlexLayoutModule,
 		AppRoutingModule
 	],
 	providers: [],
