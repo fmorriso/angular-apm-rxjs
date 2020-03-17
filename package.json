@@ -1,6 +1,7 @@
 {
   "name": "angular-apm-rxjs",
-  "version": "0.0.0",
+	"version": "1.0.0",
+	"description": "Deborah Kurata Pluralsight course - APM using Angular and RxJS",
   "scripts": {
     "ng": "ng",
     "npm-install": "npm install",
