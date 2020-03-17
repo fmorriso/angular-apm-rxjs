@@ -7,9 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { AppData } from './app-data';
 //
-import { CustomMaterialModule } from './shared/custom-material.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
-//
 import { AppRoutingModule } from './app-routing.module';
 //
 import { AppComponent } from './app.component';
@@ -24,8 +21,6 @@ import { NavigationComponent } from './navigation/navigation.component';
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
-		CustomMaterialModule,
-		FlexLayoutModule,
 		HttpClientModule,
 		InMemoryWebApiModule.forRoot(AppData, { delay: 1000 }),
 		AppRoutingModule

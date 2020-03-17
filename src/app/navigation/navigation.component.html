@@ -1,14 +1,18 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row #toolbarRow>
-      <a mat-button [routerLink]="['/']">ACME Product Management</a>
-      <!-- NOTE: use of $implicit below causes loop variable link to have a type of CustomLink -->
-      <ng-template ngFor let-link="$implicit" [ngForOf]="links">
-        <a mat-button
-          [routerLink]="link.path"
-          [routerLinkActive]="['mat-button-toggle-checked', 'active-route']"
-          #rla="routerLinkActive"
-        >
-          {{ link.label }}</a>
-      </ng-template>
-    </mat-toolbar-row>
-  </mat-toolbar>
+<nav class="navbar navbar-expand navbar-light bg-light">
+	<a class="navbar-brand">{{ pageTitle }}</a>
+	<ul class="navbar-nav">
+		<!-- NOTE: use of $implicit below causes loop variable link to have a type of CustomLink -->
+		<ng-template ngFor let-link="$implicit" [ngForOf]="links">
+			<li class="nav-item">
+				<a
+					class="nav-link"
+					[routerLink]="link.path"
+					routerLinkActive="active"
+					#rla="routerLinkActive"
+				>
+					{{ link.label }}</a
+				>
+			</li>
+		</ng-template>
+	</ul>
+</nav>

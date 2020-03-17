@@ -1,7 +1,6 @@
 import { Component, VERSION, OnInit } from '@angular/core';
 import { of, from } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
-import { MaterialVersionInformationService } from './shared/material-version-information.service';
 
 @Component({
   selector: 'pm-root',
@@ -11,11 +10,7 @@ import { MaterialVersionInformationService } from './shared/material-version-inf
 export class AppComponent implements OnInit {
   ngVersion: string;
 
-  constructor(private matVersionService: MaterialVersionInformationService) {}
-
-  public get materialVersion(): string {
-    return this.matVersionService.version.full;
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.ngVersion = VERSION.full;
