@@ -11,6 +11,7 @@ import { CustomLink } from './custom-link';
 export class NavigationComponent implements OnInit {
 	background = 'primary';
 	links: CustomLink[] = [];
+	pageTitle = 'ACME Product Management';
 
 	constructor(private router: Router) {}
 
@@ -28,6 +29,11 @@ export class NavigationComponent implements OnInit {
 				this.links.push(link);
 			}
 		}
+		const extraLink: CustomLink = {
+			path: '/products/alternate',
+			label: 'Product List (Alternate UI)'
+		};
+		this.links.push(extraLink);
 		console.log(JSON.stringify(this.links));
 	}
 }

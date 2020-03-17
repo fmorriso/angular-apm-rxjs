@@ -1,17 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+/* Bootstrap 4  */
+$enable-flex: true; // Enable Flexbox mode
+@import '~bootstrap/scss/bootstrap.scss';
+
 $color-card-header: #f3f3f3;
-html,
-body {
-	height: 100%;
+div.card-header {
+ font-size: large;
+}
+
+div.card {
+  margin-top: 10px
+}
+
+.table {
+  margin-top: 10px
 }
 body {
-	margin: 0;
-	font-family: Roboto, 'Helvetica Neue', sans-serif;
-
-	.text-center {
-		text-align: center;
-		align-items: center;
-	}
 
 	.bold {
 		font-weight: bold;
@@ -32,7 +35,7 @@ body {
 		border-width: 0.1em;
 		border-style: solid;
 	}
-	
+
 	.border-thin {
 		border-color: black;
 		border-width: 0.02em;
