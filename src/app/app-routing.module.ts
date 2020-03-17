@@ -5,9 +5,13 @@ import { WelcomeComponent } from './home/welcome.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: 'welcome', component: WelcomeComponent, data: { label: 'Home' } },
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+	{ path: 'welcome', component: WelcomeComponent, data: { label: 'Home' } },
+	{
+		path: 'products',
+		loadChildren: () => import('./products/product.module').then(m => m.ProductModule)
+	},
+	{ path: '', redirectTo: 'welcome', pathMatch: 'full' },
+	{ path: '**', component: PageNotFoundComponent }
 ];
 const routeOptions: ExtraOptions = { enableTracing: true };
 
