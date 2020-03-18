@@ -6,31 +6,31 @@ import { Product } from '../product';
 import { ProductService } from '../product.service';
 
 @Component({
-  selector: 'pm-product-list',
-  templateUrl: './product-list-alt.component.html'
+	selector: 'pm-product-list',
+	templateUrl: './product-list-alt.component.html'
 })
 export class ProductListAltComponent implements OnInit, OnDestroy {
-  pageTitle = 'Products';
-  errorMessage = '';
-  selectedProductId;
-  
-  products: Product[] = [];
-  sub: Subscription;
+	pageTitle = 'Products';
+	errorMessage = '';
+	selectedProductId;
 
-  constructor(private productService: ProductService) { }
+	products: Product[] = [];
+	sub: Subscription;
 
-  ngOnInit(): void {
-    this.sub = this.productService.getProducts().subscribe(
-      products => this.products = products,
-      error => this.errorMessage = error
-    );
-  }
+	constructor(private productService: ProductService) {}
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
+	ngOnInit(): void {
+		this.sub = this.productService.getProducts().subscribe(
+			products => (this.products = products),
+			error => (this.errorMessage = error)
+		);
+	}
 
-  onSelected(productId: number): void {
-    console.log('Not yet implemented');
-  }
+	ngOnDestroy(): void {
+		this.sub.unsubscribe();
+	}
+
+	onSelected(productId: number): void {
+		console.log('Not yet implemented');
+	}
 }
