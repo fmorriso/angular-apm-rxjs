@@ -18,6 +18,16 @@ Stop `ng serve` if it is running and then delete this file:
 ```
 node_modules/@angular/compiler-cli/ngcc/_ngcc_lock_file
 ```
+## Routing
+
+The raw JSON route.config looks like this:
+```json
+[
+    {"path":"welcome","data":{"label":"Home"}},
+    {"path":"products","data":{"label":"Product List"}},
+    {"path":"","redirectTo":"welcome","pathMatch":"full"},
+    {"path":"**"}]
+```
 
 ## Development server
 

@@ -5,13 +5,15 @@
 		<ng-template ngFor let-link="$implicit" [ngForOf]="links">
 			<li class="nav-item">
 				<a
+
 					class="nav-link"
 					[routerLink]="link.path"
 					routerLinkActive="active"
+					[routerLinkActiveOptions]="{exact: true}"
 					#rla="routerLinkActive"
 				>
-					{{ link.label }}</a
-				>
+					{{ link.label }}
+				</a>
 			</li>
 		</ng-template>
 	</ul>

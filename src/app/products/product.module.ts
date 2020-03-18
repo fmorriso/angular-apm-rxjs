@@ -20,7 +20,8 @@ import { ProductListAltComponent } from './product-list-alt/product-list-alt.com
       },
       {
         path: ':alternate',
-        component: ProductShellComponent
+				component: ProductShellComponent,
+				data: {label: 'Product List (Alternate)'}
       }
     ])
   ],

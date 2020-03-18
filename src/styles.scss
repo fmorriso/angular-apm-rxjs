@@ -1,6 +1,11 @@
-/* Bootstrap 4  */
+/*
+Bootstrap 4
+https://getbootstrap.com/docs/4.4/getting-started/theming/#importing
+*/
 $enable-flex: true; // Enable Flexbox mode
-@import '~bootstrap/scss/bootstrap.scss';
+$enable-responsive-font-sizes: true;
+$enable-deprecation-messages: true;
+@import '~bootstrap/scss/bootstrap';
 
 $color-card-header: #f3f3f3;
 div.card-header {
