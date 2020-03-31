@@ -7,7 +7,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
 	{ path: 'welcome', component: WelcomeComponent, data: { label: 'Home' } },
 	{
-		path: 'products', data: {label: 'Product List'},
+		path: 'products',
+		data: { label: 'Product List' },
 		loadChildren: () => import('./products/product.module').then(m => m.ProductModule)
 	},
 	{ path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -16,7 +17,7 @@ const routes: Routes = [
 const routeOptions: ExtraOptions = { enableTracing: true };
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, routeOptions)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes, routeOptions)],
+	exports: [RouterModule]
 })
 export class AppRoutingModule {}

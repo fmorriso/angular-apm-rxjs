@@ -18,6 +18,11 @@ Stop `ng serve` if it is running and then delete this file:
 ```
 node_modules/@angular/compiler-cli/ngcc/_ngcc_lock_file
 ```
+## TSLint 6.x special upgrade instructions
+After upgrading Angular to 9.1, to upgrade TSlint to version 6.x:
+```
+ng update @angular/cli --migrate-only tslint-version-6
+```
 ## Routing
 
 The raw JSON route.config looks like this:
