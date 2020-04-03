@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 //
-import { Router } from '@angular/router';
-import { CustomLink } from './custom-link';
+import {Router} from '@angular/router';
+import {CustomLink} from './custom-link';
 
 @Component({
 	selector: 'pm-navigation',
@@ -13,13 +13,14 @@ export class NavigationComponent implements OnInit {
 	links: CustomLink[] = [];
 	pageTitle = 'ACME Product Management';
 
-	constructor(private router: Router) {}
+	constructor(private router: Router) {
+	}
 
 	ngOnInit(): void {
 		// build the navigation links using the Angular route config that was defined in app-routing.module.ts
 		// and dependency-injected into this component, which effectively shares that route information without
 		// having to define a separate Angular service component.
-		console.log(JSON.stringify(this.router.config));
+		// console.log(JSON.stringify(this.router.config));
 		for (const route of this.router.config) {
 			// we only care about the ones that have a data.label since the others are not going to be rendered in our navigation bar
 			if (route.data && route.data.label) {
@@ -35,6 +36,6 @@ export class NavigationComponent implements OnInit {
 			label: 'Product List (Alternate UI)'
 		};
 		this.links.push(extraLink);
-		console.log(JSON.stringify(this.links));
+		console.log(`with extra link: ${JSON.stringify(this.links)}`);
 	}
 }
