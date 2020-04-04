@@ -1,36 +1,49 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, combineLatest } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
 import { Product } from './product';
 import { Supplier } from '../suppliers/supplier';
 import { SupplierService } from '../suppliers/supplier.service';
+import { ProductCategoryService } from '../product-categories/product-category.service';
 
 @Injectable({
-	providedIn: 'root'
+	providedIn: 'root',
 })
 export class ProductService {
 	private productsUrl = 'api/products';
 	private suppliersUrl = this.supplierService.suppliersUrl;
 
 	products$ = this.http.get<Product[]>(this.productsUrl).pipe(
-		map(products =>
-			products.map(
-				product =>
-					({ // use spread operator to pull in properties with same names as the ones we are emitting
-						...product,
-						price: product.price * 1.5,
-						searchKey: [product.productName]
-					} as Product)
-			)
-		),
-		tap(data => console.log('Products: ', JSON.stringify(data))),
+		tap((data) => console.log('Products: ', JSON.stringify(data))),
 		catchError(this.handleError)
 	);
 
-	constructor(private http: HttpClient, private supplierService: SupplierService) {}
+	// lookup category name using category ID using stream combining
+	productsWithCategory$ = combineLatest([
+		this.products$,
+		this.productCategoryService.productCategories$,
+	]).pipe(
+		map(([products, categories]) =>
+			products.map(
+				(product) =>
+					({
+						...product,
+						price: product.price * 1.5,
+						category: categories.find((c) => product.categoryId === c.id).name,
+						searchKey: [product.productName],
+					} as Product)
+			)
+		)
+	);
+
+	constructor(
+		private http: HttpClient,
+		private productCategoryService: ProductCategoryService,
+		private supplierService: SupplierService
+	) {}
 
 	private fakeProduct() {
 		return {
@@ -41,7 +54,7 @@ export class ProductService {
 			price: 8.9,
 			categoryId: 3,
 			category: 'Toolbox',
-			quantityInStock: 30
+			quantityInStock: 30,
 		};
 	}
 
