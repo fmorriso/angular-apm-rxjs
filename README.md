@@ -24,7 +24,7 @@ After upgrading Angular to 9.1, to upgrade TSlint to version 6.x:
 ng update @angular/cli --migrate-only tslint-version-6
 ```
 ## Routing
-
+Changed branch name to 8-react-to-actions
 The raw JSON route.config looks like this:
 ```json
 [
