@@ -21,12 +21,16 @@ export class ProductService {
 		catchError(this.handleError)
 	);
 
-	// lookup category name using category ID using stream combining
+	/*
+	Lookup category name via product category ID by combining products and product
+	categories streams
+	*/
 	productsWithCategory$ = combineLatest([
 		this.products$,
 		this.productCategoryService.productCategories$,
 	]).pipe(
 		map(([products, categories]) =>
+			// following is effectively a forEach(Product product: products) ...
 			products.map(
 				(product) =>
 					({
