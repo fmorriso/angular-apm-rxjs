@@ -1,9 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 //
-import { Observable, EMPTY } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { EMPTY, Subject, combineLatest, BehaviorSubject } from 'rxjs';
+import { catchError, map, startWith } from 'rxjs/operators';
 //
-import { Product } from './product';
 import { ProductService } from './product.service';
 import { ProductCategoryService } from '../product-categories/product-category.service';
 
@@ -15,30 +14,36 @@ import { ProductCategoryService } from '../product-categories/product-category.s
 export class ProductListComponent {
 	pageTitle = 'Product List';
 	errorMessage = '';
-	selectedCategoryId = 1;
 
-	products$ = this.productService.productsWithCategory$.pipe(
+	// category selection changes are tracked here:
+	private categorySelectedSubject = new BehaviorSubject<number>(0);
+	categorySelectedAction$ = this.categorySelectedSubject.asObservable();
+
+	// Observable<Product[]>
+	products$ = combineLatest([
+		this.productService.productsWithCategory$,
+		this.categorySelectedAction$,
+	]).pipe(
+		// Products[], number
+		map(([products, selectedCategoryId]) =>
+			products.filter((product) => {
+				return selectedCategoryId
+					? product.categoryId === selectedCategoryId
+					: true;
+			})
+		),
 		catchError((err) => {
 			this.errorMessage = err;
 			return EMPTY;
 		})
 	);
 
+	// Observable<ProductCategory[]>
 	categories$ = this.productCategoryService.productCategories$.pipe(
-		catchError(err => {
+		catchError((err) => {
 			this.errorMessage = err;
 			return EMPTY;
 		})
-	);
-
-	productsSimpleFilter$ = this.productService.productsWithCategory$.pipe(
-		map((products) =>
-			products.filter((product) =>
-				this.selectedCategoryId
-					? product.categoryId === this.selectedCategoryId
-					: true
-			)
-		)
 	);
 
 	constructor(
@@ -51,6 +56,6 @@ export class ProductListComponent {
 	}
 
 	onSelected(categoryId: string): void {
-		this.selectedCategoryId = parseInt(categoryId, 10);
+		this.categorySelectedSubject.next(parseInt(categoryId, 10));
 	}
 }
