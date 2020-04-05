@@ -5,10 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-// ngx-bootstrap
-import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
 //
 import { AppData } from './app-data';
 //
@@ -30,9 +26,6 @@ import { NavigationComponent } from './navigation/navigation.component';
 	],
 	imports: [
 		BrowserModule,
-		AccordionModule.forRoot(),
-		ButtonsModule.forRoot(),
-		TooltipModule.forRoot(),
 		BrowserAnimationsModule,
 		HttpClientModule,
 		InMemoryWebApiModule.forRoot(AppData, { delay: 1000 }),

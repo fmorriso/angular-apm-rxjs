@@ -4,7 +4,7 @@
 	"description": "Deborah Kurata Pluralsight course - APM using Angular and RxJS",
 	"scripts": {
 		"ng": "ng",
-		"npm-install": "npm install",
+		"install-packages": "npm install",
 		"start": "ng serve --configuration=development --open",
 		"start-prod": "ng serve --configuration=production --open",
 		"build": "ng build --configuration=development",
@@ -26,7 +26,8 @@
 		"@angular/router": "~9.1.0",
 		"bootstrap": "^4.4.1",
 		"font-awesome": "^4.7.0",
-		"ngx-bootstrap": "^5.5.0",
+		"jquery": "^3.4.1",
+		"popper.js": "^1.16.1",
 		"rxjs": "~6.5.5",
 		"tslib": "^1.11.1",
 		"zone.js": "~0.10.3"
