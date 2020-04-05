@@ -19,7 +19,10 @@ export class ProductCategoryService {
 			catchError(this.handleError)
 		);
 
-	constructor(private http: HttpClient) {}
+	constructor(
+		private http: HttpClient
+
+	) {}
 
 	private handleError(err: any) {
 		// in a real world app, we may send the server to some remote logging infrastructure
