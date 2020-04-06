@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { throwError, combineLatest, BehaviorSubject } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import {
+	throwError,
+	combineLatest,
+	BehaviorSubject,
+	Subject,
+	merge,
+} from 'rxjs';
+import { catchError, tap, map, scan } from 'rxjs/operators';
 
 import { Product } from './product';
 import { Supplier } from '../suppliers/supplier';
@@ -52,10 +58,25 @@ export class ProductService {
 		this.productsWithCategory$,
 		this.productSelectedAction$,
 	]).pipe(
+		// forEach(product in Products[] with selectedProductId) ...
 		map(([products, selectedProductId]) =>
 			products.find((product) => product.id === selectedProductId)
 		),
 		tap((product) => console.log('selectedProduct', product))
+	);
+
+	private productInsertedSubject = new Subject<Product>();
+	productInsertedAction$ = this.productInsertedSubject.asObservable();
+
+	productsWithAdd$ = merge(
+		this.productsWithCategory$,
+		this.productInsertedAction$
+	).pipe(
+		scan((acc: Product[], value: Product) => [...acc, value]),
+		catchError((err) => {
+			console.error(err);
+			return throwError(err);
+		})
 	);
 
 	constructor(
@@ -66,6 +87,11 @@ export class ProductService {
 
 	selectedProductChanged(selectedProductId: number): void {
 		this.productSelectedSubject.next(selectedProductId);
+	}
+
+	addProduct(newProduct?: Product) {
+		newProduct = newProduct || this.fakeProduct();
+		this.productInsertedSubject.next(newProduct);
 	}
 
 	private fakeProduct() {
