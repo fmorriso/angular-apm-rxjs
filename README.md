@@ -26,7 +26,8 @@ The raw JSON route.config looks like this:
     {"path":"welcome","data":{"label":"Home"}},
     {"path":"products","data":{"label":"Product List"}},
     {"path":"","redirectTo":"welcome","pathMatch":"full"},
-    {"path":"**"}]
+    {"path":"**"}
+]
 ```
 
 ## Development server
