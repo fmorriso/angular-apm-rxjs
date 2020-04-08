@@ -9,15 +9,16 @@ const routes: Routes = [
 	{
 		path: 'products',
 		data: { label: 'Product List' },
-		loadChildren: () => import('./products/product.module').then(m => m.ProductModule)
+		loadChildren: () =>
+			import('./products/product.module').then((m) => m.ProductModule),
 	},
 	{ path: '', redirectTo: 'welcome', pathMatch: 'full' },
-	{ path: '**', component: PageNotFoundComponent }
+	{ path: '**', component: PageNotFoundComponent },
 ];
-const routeOptions: ExtraOptions = { enableTracing: true };
+const routeOptions: ExtraOptions = { enableTracing: false };
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes, routeOptions)],
-	exports: [RouterModule]
+	exports: [RouterModule],
 })
 export class AppRoutingModule {}
