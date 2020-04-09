@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { throwError, of } from 'rxjs';
-import { concatMap, tap, mergeMap } from 'rxjs/operators';
+import { concatMap, tap, mergeMap, switchMap } from 'rxjs/operators';
 import { Supplier } from './supplier';
 
 @Injectable({
@@ -12,22 +12,33 @@ export class SupplierService {
 	suppliersUrl = 'api/suppliers';
 
 	// concatMap is synchronous
-	suppliersWithConcatMap$ = of(1, 5, 8)
-		.pipe(
-			tap((id) => console.log('concatMap source observable', id)),
-			concatMap((id) => this.http.get<Supplier>(`${this.suppliersUrl}/${id}}`))
-		);
+	suppliersWithConcatMap$ = of(1, 5, 8).pipe(
+		tap((id) => console.log('concatMap source observable', id)),
+		concatMap((id) => this.http.get<Supplier>(`${this.suppliersUrl}/${id}}`))
+	);
 
 	// mergeMap is parallel
-	suupliersWithMergeMap$ = of(1, 5, 8)
-		.pipe(
-			tap((id) => console.log('mergeMap source observable', id)),
-			mergeMap((id) => this.http.get<Supplier>(`${this.suppliersUrl}/${id}}`))
-		);
+	suupliersWithMergeMap$ = of(1, 5, 8).pipe(
+		tap((id) => console.log('mergeMap source observable', id)),
+		mergeMap((id) => this.http.get<Supplier>(`${this.suppliersUrl}/${id}}`))
+	);
+
+	// switchMap emits only the last one
+	suppliersWithSwitchMap$ = of(1, 5, 8).pipe(
+		tap((id) => console.log('switchMap source observable', id)),
+		switchMap((id) => this.http.get<Supplier>(`${this.suppliersUrl}/${id}}`))
+	);
 
 	constructor(private http: HttpClient) {
-		this.suppliersWithConcatMap$.subscribe(item => console.log('concatMap result', item));
-		this.suupliersWithMergeMap$.subscribe((item) => console.log('mergeMap result', item));
+ 		this.suppliersWithConcatMap$.subscribe((item) =>
+			console.log('concatMap result', item)
+		);
+		 this.suupliersWithMergeMap$.subscribe((item) =>
+			console.log('mergeMap result', item)
+		);
+		 this.suppliersWithSwitchMap$.subscribe((item) =>
+			console.log('switchMap result', item)
+		);
 	}
 
 	private handleError(err: any) {
