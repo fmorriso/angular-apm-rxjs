@@ -3,11 +3,9 @@
 This project was originally generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
 
 It has been upgraded to the following:
-* Angular/CLI 9.0.6
-* Angular 9.0.6
-* Angular Material 9.1.2
-* Angular Flex Layout 9.0.0-beta.29
-* RxJS 6.5.4
+* Angular/CLI 9.1.1
+* Angular 9.1.1
+* RxJS 6.5.5
 ## Problems and Solutions
 Invoking `ng build` or `ng serve` sometimes results in the following issue:
 ```
