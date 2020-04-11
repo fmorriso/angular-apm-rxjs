@@ -47,8 +47,8 @@ export class ProductService {
 						searchKey: [product.productName],
 					} as Product)
 			)
-		)
-		, shareReplay(1)
+		),
+		shareReplay(1)
 	);
 
 	private productSelectedSubject = new BehaviorSubject<number>(0);
@@ -79,6 +79,18 @@ export class ProductService {
 			console.error(err);
 			return throwError(err);
 		})
+	);
+
+	// get all Supplier entities for the currently selected Product as Observable(Supplier[])
+	selectedProductSuppliers$ = combineLatest([
+		this.selectedProduct$,
+		this.supplierService.suppliers$,
+	]).pipe(
+		map(([selectedProduct, suppliers]) =>
+			suppliers.filter((supplier) =>
+				selectedProduct.supplierIds.includes(supplier.id)
+			)
+		)
 	);
 
 	constructor(

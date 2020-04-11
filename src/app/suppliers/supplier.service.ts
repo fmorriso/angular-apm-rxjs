@@ -2,7 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { throwError, of } from 'rxjs';
-import { concatMap, tap, mergeMap, switchMap } from 'rxjs/operators';
+import {
+	concatMap,
+	tap,
+	mergeMap,
+	switchMap,
+	shareReplay,
+	catchError,
+} from 'rxjs/operators';
 import { Supplier } from './supplier';
 
 @Injectable({
@@ -10,6 +17,13 @@ import { Supplier } from './supplier';
 })
 export class SupplierService {
 	suppliersUrl = 'api/suppliers';
+
+	// Observable<Supplier[]>
+	suppliers$ = this.http.get<Supplier[]>(this.suppliersUrl).pipe(
+		tap((data) => console.log('suppliers', JSON.stringify(data))),
+		shareReplay(1),
+		catchError(this.handleError)
+	);
 
 	// concatMap is synchronous
 	suppliersWithConcatMap$ = of(1, 5, 8).pipe(
@@ -30,13 +44,13 @@ export class SupplierService {
 	);
 
 	constructor(private http: HttpClient) {
- 		this.suppliersWithConcatMap$.subscribe((item) =>
+		this.suppliersWithConcatMap$.subscribe((item) =>
 			console.log('concatMap result', item)
 		);
-		 this.suupliersWithMergeMap$.subscribe((item) =>
+		this.suupliersWithMergeMap$.subscribe((item) =>
 			console.log('mergeMap result', item)
 		);
-		 this.suppliersWithSwitchMap$.subscribe((item) =>
+		this.suppliersWithSwitchMap$.subscribe((item) =>
 			console.log('switchMap result', item)
 		);
 	}
