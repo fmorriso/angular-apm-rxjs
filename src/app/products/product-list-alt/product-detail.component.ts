@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 //
-import { catchError, map } from 'rxjs/operators';
-import { EMPTY, Subject } from 'rxjs';
+import { catchError, map, filter } from 'rxjs/operators';
+import { EMPTY, Subject, combineLatest } from 'rxjs';
 //
 import { ProductService } from '../product.service';
 import { Product } from '../product';
@@ -37,6 +37,28 @@ export class ProductDetailComponent {
 			return EMPTY;
 		})
 	);
+
+	// define the View Model for this page by combining multiple observables into a single Observable 
+	vm$ = combineLatest([
+		//
+		this.product$,
+		this.productSuppliers$,
+		this.pageTitle$,
+	])
+		//
+		.pipe(
+			// destructure product to figure out if the rest of this operation is worth performing
+			filter(([product]) => Boolean(product)),
+			// following is essentially a forEach(Product, Suppliers[], string)...
+			map(([product, productSuppliers, pageTitle]) =>
+				// create an anonymous object consisting of each piece of the view model we want to work with
+				({
+					product,          // Product
+					productSuppliers, // Supplier[]
+					pageTitle,        // string
+				})
+			)
+		);
 
 	constructor(private productService: ProductService) {}
 }
