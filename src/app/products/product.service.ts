@@ -7,8 +7,19 @@ import {
 	BehaviorSubject,
 	Subject,
 	merge,
+	from,
 } from 'rxjs';
-import { catchError, tap, map, scan, shareReplay } from 'rxjs/operators';
+import {
+	catchError,
+	tap,
+	map,
+	scan,
+	shareReplay,
+	mergeMap,
+	toArray,
+	filter,
+	switchMap,
+} from 'rxjs/operators';
 
 import { Product } from './product';
 import { Supplier } from '../suppliers/supplier';
@@ -82,6 +93,7 @@ export class ProductService {
 	);
 
 	// get all Supplier entities for the currently selected Product as Observable(Supplier[])
+	/*
 	selectedProductSuppliers$ = combineLatest([
 		this.selectedProduct$,
 		this.supplierService.suppliers$,
@@ -92,6 +104,29 @@ export class ProductService {
 			)
 		)
 	);
+	 */
+
+	// Just-In-Time approach to getting the Suppliers for the currently selected product as Observable(Supplier[])
+	selectedProductSuppliers$ = this.selectedProduct$
+		// make sure we skip this process when page first loads because there will not be a currently selected product
+		.pipe(
+			filter((selectedProduct) => Boolean(selectedProduct)),
+			// wait until user has made their selection using switchMap insted of mergeMap
+			switchMap((selectedProduct) =>
+				// form an Observable<number> from each of the supplier Ids associated with the product
+				from(selectedProduct.supplierIds)
+					// get the Supplier entity for the specified supplier Id
+					.pipe(
+						mergeMap((supplierId) =>
+							this.http.get<Supplier>(`${this.suppliersUrl}/${supplierId}`)
+						),
+						toArray(),
+						tap((suppliers) =>
+							console.log('suppliers', JSON.stringify(suppliers))
+						)
+					)
+			)
+		);
 
 	constructor(
 		private http: HttpClient,
