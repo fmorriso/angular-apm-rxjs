@@ -22,31 +22,43 @@ export class ProductListComponent {
 	categorySelectedAction$ = this.categorySelectedSubject.asObservable();
 
 	// Observable<Product[]>
-	products$ = combineLatest([
+	private products$ = combineLatest([
 		this.productService.productsWithAdd$,
 		this.categorySelectedAction$,
-	]).pipe(
-		// Products[], number
-		map(([products, selectedCategoryId]) =>
-			products.filter((product) => {
-				return selectedCategoryId
-					? product.categoryId === selectedCategoryId
-					: true;
+	])
+		//
+		.pipe(
+			// Products[], number
+			map(([products, selectedCategoryId]) =>
+				products.filter((product) => {
+					return selectedCategoryId
+						? product.categoryId === selectedCategoryId
+						: true;
+				})
+			),
+			catchError((err) => {
+				this.errorMessageSubject.next(err);
+				return EMPTY;
 			})
-		),
-		catchError((err) => {
-			this.errorMessageSubject.next(err);
-			return EMPTY;
-		})
-	);
+		);
 
 	// Observable<ProductCategory[]>
-	categories$ = this.productCategoryService.productCategories$.pipe(
-		catchError((err) => {
-			this.errorMessageSubject.next(err);
-			return EMPTY;
-		})
-	);
+	private categories$ = this.productCategoryService.productCategories$
+		//
+		.pipe(
+			catchError((err) => {
+				this.errorMessageSubject.next(err);
+				return EMPTY;
+			})
+		);
+
+	// Combine all streams for the view
+	vm$ = combineLatest([this.products$, this.categories$])
+		//
+		.pipe(
+			//
+			map(([products, categories]) => ({ products, categories }))
+		);
 
 	constructor(
 		private productService: ProductService,

@@ -46,21 +46,24 @@ export class ProductService {
 	productsWithCategory$ = combineLatest([
 		this.products$,
 		this.productCategoryService.productCategories$,
-	]).pipe(
-		map(([products, categories]) =>
-			// following is effectively a forEach(Product product: products) ...
-			products.map(
-				(product) =>
-					({
-						...product,
-						price: product.price * 1.5,
-						category: categories.find((c) => product.categoryId === c.id).name,
-						searchKey: [product.productName],
-					} as Product)
-			)
-		),
-		shareReplay(1)
-	);
+	])
+		//
+		.pipe(
+			map(([products, categories]) =>
+				// following is effectively a forEach(Product product: products) ...
+				products.map(
+					(product) =>
+						({
+							...product,
+							price: product.price * 1.5,
+							category: categories.find((c) => product.categoryId === c.id)
+								.name,
+							searchKey: [product.productName],
+						} as Product)
+				)
+			),
+			shareReplay(1)
+		);
 
 	private productSelectedSubject = new BehaviorSubject<number>(0);
 	productSelectedAction$ = this.productSelectedSubject.asObservable();
@@ -69,14 +72,16 @@ export class ProductService {
 	selectedProduct$ = combineLatest([
 		this.productsWithCategory$,
 		this.productSelectedAction$,
-	]).pipe(
-		// forEach(product in Products[] with selectedProductId) ...
-		map(([products, selectedProductId]) =>
-			products.find((product) => product.id === selectedProductId)
-		),
-		tap((product) => console.log('selectedProduct', product)),
-		shareReplay(1)
-	);
+	])
+		//
+		.pipe(
+			// forEach(product in Products[] with selectedProductId) ...
+			map(([products, selectedProductId]) =>
+				products.find((product) => product.id === selectedProductId)
+			),
+			tap((product) => console.log('selectedProduct', product)),
+			shareReplay(1)
+		);
 
 	private productInsertedSubject = new Subject<Product>();
 	productInsertedAction$ = this.productInsertedSubject.asObservable();
@@ -84,13 +89,15 @@ export class ProductService {
 	productsWithAdd$ = merge(
 		this.productsWithCategory$,
 		this.productInsertedAction$
-	).pipe(
-		scan((acc: Product[], value: Product) => [...acc, value]),
-		catchError((err) => {
-			console.error(err);
-			return throwError(err);
-		})
-	);
+	)
+		//
+		.pipe(
+			scan((acc: Product[], value: Product) => [...acc, value]),
+			catchError((err) => {
+				console.error(err);
+				return throwError(err);
+			})
+		);
 
 	/*
 	// get all Supplier entities for the currently selected Product as Observable(Supplier[])

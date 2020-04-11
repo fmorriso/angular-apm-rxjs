@@ -16,29 +16,33 @@ export class ProductDetailComponent {
 	errorMessage$ = this.errorMessageSubject.asObservable();
 
 	// Observable<Product>
-	product$ = this.productService.selectedProduct$.pipe(
-		catchError((err) => {
-			this.errorMessageSubject = err;
-			return EMPTY;
-		})
-	);
+	private product$ = this.productService.selectedProduct$
+		//
+		.pipe(
+			catchError((err) => {
+				this.errorMessageSubject = err;
+				return EMPTY;
+			})
+		);
 
 	// make the page title dynamic by responding to changes in the selected product and creating an Observable<string>
-	pageTitle$ = this.product$
+	private pageTitle$ = this.product$
 		//
 		.pipe(
 			map((p: Product) => (p ? `Product Detail for: ${p.productName}` : null))
 		);
 
 	// Ask the product service for the set of Suppliers for the currently selected product as an Observable<Subject[]>
-	productSuppliers$ = this.productService.selectedProductSuppliers$.pipe(
-		catchError((err) => {
-			this.errorMessageSubject.next(err);
-			return EMPTY;
-		})
-	);
+	private productSuppliers$ = this.productService.selectedProductSuppliers$
+		//
+		.pipe(
+			catchError((err) => {
+				this.errorMessageSubject.next(err);
+				return EMPTY;
+			})
+		);
 
-	// define the View Model for this page by combining multiple observables into a single Observable 
+	// define the View Model for this page by combining multiple observables into a single Observable
 	vm$ = combineLatest([
 		//
 		this.product$,
@@ -53,9 +57,9 @@ export class ProductDetailComponent {
 			map(([product, productSuppliers, pageTitle]) =>
 				// create an anonymous object consisting of each piece of the view model we want to work with
 				({
-					product,          // Product
+					product, // Product
 					productSuppliers, // Supplier[]
-					pageTitle,        // string
+					pageTitle, // string
 				})
 			)
 		);
