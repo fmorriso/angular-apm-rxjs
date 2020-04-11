@@ -1,9 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 //
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { EMPTY, Subject } from 'rxjs';
 //
 import { ProductService } from '../product.service';
+import { Product } from '../product';
 
 @Component({
 	selector: 'pm-product-detail',
@@ -11,7 +12,6 @@ import { ProductService } from '../product.service';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailComponent {
-	pageTitle = 'Product Detail';
 	private errorMessageSubject = new Subject<string>();
 	errorMessage$ = this.errorMessageSubject.asObservable();
 
@@ -22,6 +22,13 @@ export class ProductDetailComponent {
 			return EMPTY;
 		})
 	);
+
+	// make the page title dynamic by responding to changes in the selected product and creating an Observable<string>
+	pageTitle$ = this.product$
+		//
+		.pipe(
+			map((p: Product) => (p ? `Product Detail for: ${p.productName}` : null))
+		);
 
 	// Ask the product service for the set of Suppliers for the currently selected product as an Observable<Subject[]>
 	productSuppliers$ = this.productService.selectedProductSuppliers$.pipe(
