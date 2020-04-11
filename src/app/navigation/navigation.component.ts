@@ -31,11 +31,13 @@ export class NavigationComponent implements OnInit {
 				this.links.push(link);
 			}
 		}
+		// Product List (Alternate UI) needs to be forced into the mix
+		// because the Angular route API does not seem to have a way to "dig down" through lazy-loaded child routes
 		const extraLink: CustomLink = {
 			path: '/products/alternate',
 			label: 'Product List (Alternate UI)'
 		};
 		this.links.push(extraLink);
-		console.log(`with extra link: ${JSON.stringify(this.links)}`);
+		// console.log(`with extra link: ${JSON.stringify(this.links)}`);
 	}
 }

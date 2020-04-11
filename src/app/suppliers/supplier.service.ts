@@ -25,35 +25,7 @@ export class SupplierService {
 		catchError(this.handleError)
 	);
 
-	// concatMap is synchronous
-	suppliersWithConcatMap$ = of(1, 5, 8).pipe(
-		tap((id) => console.log('concatMap source observable', id)),
-		concatMap((id) => this.http.get<Supplier>(`${this.suppliersUrl}/${id}}`))
-	);
-
-	// mergeMap is parallel
-	suupliersWithMergeMap$ = of(1, 5, 8).pipe(
-		tap((id) => console.log('mergeMap source observable', id)),
-		mergeMap((id) => this.http.get<Supplier>(`${this.suppliersUrl}/${id}}`))
-	);
-
-	// switchMap emits only the last one
-	suppliersWithSwitchMap$ = of(1, 5, 8).pipe(
-		tap((id) => console.log('switchMap source observable', id)),
-		switchMap((id) => this.http.get<Supplier>(`${this.suppliersUrl}/${id}}`))
-	);
-
-	constructor(private http: HttpClient) {
-		this.suppliersWithConcatMap$.subscribe((item) =>
-			console.log('concatMap result', item)
-		);
-		this.suupliersWithMergeMap$.subscribe((item) =>
-			console.log('mergeMap result', item)
-		);
-		this.suppliersWithSwitchMap$.subscribe((item) =>
-			console.log('switchMap result', item)
-		);
-	}
+	constructor(private http: HttpClient) {}
 
 	private handleError(err: any) {
 		// in a real world app, we may send the server to some remote logging infrastructure

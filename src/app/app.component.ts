@@ -5,7 +5,7 @@ import { map, take, tap } from 'rxjs/operators';
 @Component({
 	selector: 'pm-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
 	ngVersion: string;
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.ngVersion = VERSION.full;
-
+		/*
 		of(2, 4, 6, 8).subscribe(console.log);
 
 		from([20, 15, 10, 5])
@@ -43,5 +43,6 @@ export class AppComponent implements OnInit {
 				take(2)
 			)
 			.subscribe(console.log);
+*/
 	}
 }
