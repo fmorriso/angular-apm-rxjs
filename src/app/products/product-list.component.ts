@@ -1,36 +1,75 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 //
-import { Observable, EMPTY } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { EMPTY, Subject, combineLatest, BehaviorSubject } from 'rxjs';
+import { catchError, map, startWith } from 'rxjs/operators';
 //
-import { Product } from './product';
 import { ProductService } from './product.service';
+import { ProductCategoryService } from '../product-categories/product-category.service';
 
 @Component({
 	templateUrl: './product-list.component.html',
 	styleUrls: ['./product-list.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductListComponent {
 	pageTitle = 'Product List';
-	errorMessage = '';
-	categories;
+	//
+	private errorMessageSubject = new Subject<string>();
+	errorMessage$ = this.errorMessageSubject.asObservable();
 
-	products$ = this.productService.products$
+	// category selection changes are tracked here:
+	private categorySelectedSubject = new BehaviorSubject<number>(0);
+	categorySelectedAction$ = this.categorySelectedSubject.asObservable();
+
+	// Observable<Product[]>
+	private products$ = combineLatest([
+		this.productService.productsWithAdd$,
+		this.categorySelectedAction$,
+	])
+		//
 		.pipe(
-			catchError(err => {
-				this.errorMessage = err;
+			// Products[], number
+			map(([products, selectedCategoryId]) =>
+				products.filter((product) => {
+					return selectedCategoryId
+						? product.categoryId === selectedCategoryId
+						: true;
+				})
+			),
+			catchError((err) => {
+				this.errorMessageSubject.next(err);
 				return EMPTY;
 			})
-	);
+		);
 
-	constructor(private productService: ProductService) {}
+	// Observable<ProductCategory[]>
+	private categories$ = this.productCategoryService.productCategories$
+		//
+		.pipe(
+			catchError((err) => {
+				this.errorMessageSubject.next(err);
+				return EMPTY;
+			})
+		);
+
+	// Combine all streams for the view
+	vm$ = combineLatest([this.products$, this.categories$])
+		//
+		.pipe(
+			//
+			map(([products, categories]) => ({ products, categories }))
+		);
+
+	constructor(
+		private productService: ProductService,
+		private productCategoryService: ProductCategoryService
+	) {}
 
 	onAdd(): void {
-		console.log('Not yet implemented');
+		this.productService.addProduct();
 	}
 
 	onSelected(categoryId: string): void {
-		console.log('Not yet implemented');
+		this.categorySelectedSubject.next(parseInt(categoryId, 10));
 	}
 }

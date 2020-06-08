@@ -4,9 +4,7 @@
 		<!-- NOTE: use of $implicit below causes loop variable link to have a type of CustomLink -->
 		<ng-template ngFor let-link="$implicit" [ngForOf]="links">
 			<li class="nav-item">
-				<a
-
-					class="nav-link"
+				<a	class="nav-link"
 					[routerLink]="link.path"
 					routerLinkActive="active"
 					[routerLinkActiveOptions]="{exact: true}"

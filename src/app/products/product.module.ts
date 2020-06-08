@@ -10,26 +10,26 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductListAltComponent } from './product-list-alt/product-list-alt.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    ReactiveFormsModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: ProductListComponent
-      },
-      {
-        path: ':alternate',
+	imports: [
+		SharedModule,
+		ReactiveFormsModule,
+		RouterModule.forChild([
+			{
+				path: '',
+				component: ProductListComponent
+			},
+			{
+				path: ':alternate',
 				component: ProductShellComponent,
-				data: {label: 'Product List (Alternate)'}
-      }
-    ])
-  ],
-  declarations: [
-    ProductListComponent,
-    ProductShellComponent,
-    ProductListAltComponent,
-    ProductDetailComponent
-  ]
+				data: { label: 'Product List (Alternate)' }
+			}
+		])
+	],
+	declarations: [
+		ProductListComponent,
+		ProductShellComponent,
+		ProductListAltComponent,
+		ProductDetailComponent
+	]
 })
-export class ProductModule { }
+export class ProductModule {}
