@@ -5,45 +5,46 @@ https://getbootstrap.com/docs/4.4/getting-started/theming/#importing
 $enable-flex: true; // Enable Flexbox mode
 $enable-responsive-font-sizes: true;
 $enable-deprecation-messages: true;
-@import "~bootstrap/scss/bootstrap.scss";
+@import '~bootstrap/scss/bootstrap.scss';
 
-/* font-awesome */
+/* font-awesome
 $fa-font-path: "../node_modules/font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome.scss";
+*/
 
 $color-card-header: #f3f3f3;
 div.card-header {
-	font-size: large;
+  font-size: large;
 }
 
 div.card {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 
 .table {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 body {
-	.border-thick {
-		border-color: black;
-		border-width: 0.1em;
-		border-style: solid;
-	}
+  .border-thick {
+    border-color: black;
+    border-width: 0.1em;
+    border-style: solid;
+  }
 
-	.border-thin {
-		border-color: black;
-		border-width: 0.02em;
-		border-style: solid;
-	}
+  .border-thin {
+    border-color: black;
+    border-width: 0.02em;
+    border-style: solid;
+  }
 
-	.center-66-pct {
-		width: 66%;
-		max-width: 66%;
-		margin-left: 17%;
-		margin-right: 17%;
-	}
+  .center-66-pct {
+    width: 66%;
+    max-width: 66%;
+    margin-left: 17%;
+    margin-right: 17%;
+  }
 
-	.gray-background {
-		background-color: $color-card-header;
-	}
+  .gray-background {
+    background-color: $color-card-header;
+  }
 }

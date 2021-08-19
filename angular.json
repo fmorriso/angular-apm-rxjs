@@ -22,28 +22,25 @@
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
 						"tsConfig": "tsconfig.app.json",
-						"aot": true,
-						"assets": ["src/favicon.ico", "src/assets"],
+						"assets": [
+							"src/favicon.ico",
+							"src/assets"
+						],
 						"styles": [
 							"src/styles.scss"
 						],
-						"scripts": [
-							"node_modules/jquery/dist/jquery.min.js",
-							"node_modules/popper.js/dist/umd/popper.min.js",
-							"node_modules/bootstrap/dist/js/bootstrap.min.js"
-						],
-						"es5BrowserSupport": true
+						"scripts": [],
+						"vendorChunk": true,
+						"extractLicenses": false,
+						"buildOptimizer": false,
+						"sourceMap": true,
+						"optimization": false,
+						"namedChunks": true
 					},
 					"configurations": {
 						"development": {
-							"optimization": false,
 							"outputHashing": "none",
-							"sourceMap": true,
-							"extractCss": true,
-							"namedChunks": true,
 							"extractLicenses": true,
-							"vendorChunk": true,
-							"buildOptimizer": false,
 							"commonChunk": true,
 							"progress": true,
 							"watch": true
@@ -58,10 +55,8 @@
 							"optimization": true,
 							"outputHashing": "all",
 							"sourceMap": false,
-							"extractCss": true,
 							"namedChunks": false,
 							"extractLicenses": true,
-							"vendorChunk": true,
 							"commonChunk": true,
 							"buildOptimizer": true,
 							"progress": true,
@@ -78,7 +73,8 @@
 								}
 							]
 						}
-					}
+					},
+					"defaultConfiguration": ""
 				},
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
